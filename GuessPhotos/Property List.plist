@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<array>
+	<dict>
+		<key>answer</key>
+		<string>月光宝盒</string>
+		<key>icon</key>
+		<string>1</string>
+		<key>option</key>
+		<array>
+			<string>光</string>
+			<string>盒</string>
+			<string>月</string>
+			<string>包</string>
+			<string>华</string>
+			<string>高</string>
+			<string>彩</string>
+			<string>城</string>
+			<string>空</string>
+			<string>之</string>
+			<string>天</string>
+		</array>
+	</dict>
+	<dict>
+		<key>answer</key>
+		<string>高华彩</string>
+		<key>icon</key>
+		<string>2</string>
+		<key>option</key>
+		<array>
+			<string>光</string>
+			<string>盒</string>
+			<string>月</string>
+			<string>包</string>
+			<string>华</string>
+			<string>高</string>
+			<string>彩</string>
+			<string>城</string>
+			<string>空</string>
+			<string>之</string>
+			<string>天</string>
+		</array>
+	</dict>
+	<dict>
+		<key>answer</key>
+		<string>天空之城</string>
+		<key>icon</key>
+		<string>3</string>
+		<key>option</key>
+		<array>
+			<string>光</string>
+			<string>盒</string>
+			<string>月</string>
+			<string>包</string>
+			<string>华</string>
+			<string>高</string>
+			<string>彩</string>
+			<string>城</string>
+			<string>空</string>
+			<string>之</string>
+			<string>天</string>
+		</array>
+	</dict>
+</array>
+</plist>
