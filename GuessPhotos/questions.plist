@@ -7,7 +7,7 @@
 		<string>月光宝盒</string>
 		<key>icon</key>
 		<string>1</string>
-		<key>option</key>
+		<key>options</key>
 		<array>
 			<string>光</string>
 			<string>盒</string>
@@ -27,7 +27,7 @@
 		<string>高华彩</string>
 		<key>icon</key>
 		<string>2</string>
-		<key>option</key>
+		<key>options</key>
 		<array>
 			<string>光</string>
 			<string>盒</string>
@@ -47,7 +47,7 @@
 		<string>天空之城</string>
 		<key>icon</key>
 		<string>3</string>
-		<key>option</key>
+		<key>options</key>
 		<array>
 			<string>光</string>
 			<string>盒</string>

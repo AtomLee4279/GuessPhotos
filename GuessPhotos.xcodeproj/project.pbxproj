@@ -12,8 +12,9 @@
 		67A074C22061F66B005A4ED1 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 67A074C02061F66B005A4ED1 /* Main.storyboard */; };
 		67A074C72061F66B005A4ED1 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 67A074C52061F66B005A4ED1 /* LaunchScreen.storyboard */; };
 		67A074CA2061F66B005A4ED1 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 67A074C92061F66B005A4ED1 /* main.m */; };
-		67A074D120620537005A4ED1 /* Property List.plist in Resources */ = {isa = PBXBuildFile; fileRef = 67A074D020620537005A4ED1 /* Property List.plist */; };
+		67A074D120620537005A4ED1 /* questions.plist in Resources */ = {isa = PBXBuildFile; fileRef = 67A074D020620537005A4ED1 /* questions.plist */; };
 		67A074D320620F05005A4ED1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 67A074D220620F05005A4ED1 /* Assets.xcassets */; };
+		67A074D62062510D005A4ED1 /* AppModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 67A074D52062510D005A4ED1 /* AppModel.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,8 +27,10 @@
 		67A074C62061F66B005A4ED1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		67A074C82061F66B005A4ED1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		67A074C92061F66B005A4ED1 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		67A074D020620537005A4ED1 /* Property List.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Property List.plist"; sourceTree = "<group>"; };
+		67A074D020620537005A4ED1 /* questions.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = questions.plist; sourceTree = "<group>"; };
 		67A074D220620F05005A4ED1 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		67A074D42062510D005A4ED1 /* AppModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppModel.h; sourceTree = "<group>"; };
+		67A074D52062510D005A4ED1 /* AppModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppModel.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -60,18 +63,44 @@
 		67A074B92061F66B005A4ED1 /* GuessPhotos */ = {
 			isa = PBXGroup;
 			children = (
-				67A074BA2061F66B005A4ED1 /* AppDelegate.h */,
-				67A074BB2061F66B005A4ED1 /* AppDelegate.m */,
-				67A074BD2061F66B005A4ED1 /* ViewController.h */,
-				67A074BE2061F66B005A4ED1 /* ViewController.m */,
+				67A074D820625120005A4ED1 /* Models */,
+				67A074D72062511A005A4ED1 /* Controllers */,
+				67A074DA20625179005A4ED1 /* Others */,
 				67A074D220620F05005A4ED1 /* Assets.xcassets */,
 				67A074C02061F66B005A4ED1 /* Main.storyboard */,
-				67A074D020620537005A4ED1 /* Property List.plist */,
+				67A074D020620537005A4ED1 /* questions.plist */,
 				67A074C52061F66B005A4ED1 /* LaunchScreen.storyboard */,
 				67A074C82061F66B005A4ED1 /* Info.plist */,
-				67A074C92061F66B005A4ED1 /* main.m */,
 			);
 			path = GuessPhotos;
+			sourceTree = "<group>";
+		};
+		67A074D72062511A005A4ED1 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				67A074BD2061F66B005A4ED1 /* ViewController.h */,
+				67A074BE2061F66B005A4ED1 /* ViewController.m */,
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
+		67A074D820625120005A4ED1 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				67A074D42062510D005A4ED1 /* AppModel.h */,
+				67A074D52062510D005A4ED1 /* AppModel.m */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		67A074DA20625179005A4ED1 /* Others */ = {
+			isa = PBXGroup;
+			children = (
+				67A074BB2061F66B005A4ED1 /* AppDelegate.m */,
+				67A074BA2061F66B005A4ED1 /* AppDelegate.h */,
+				67A074C92061F66B005A4ED1 /* main.m */,
+			);
+			path = Others;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -133,7 +162,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				67A074C72061F66B005A4ED1 /* LaunchScreen.storyboard in Resources */,
-				67A074D120620537005A4ED1 /* Property List.plist in Resources */,
+				67A074D120620537005A4ED1 /* questions.plist in Resources */,
 				67A074D320620F05005A4ED1 /* Assets.xcassets in Resources */,
 				67A074C22061F66B005A4ED1 /* Main.storyboard in Resources */,
 			);
@@ -149,6 +178,7 @@
 				67A074BF2061F66B005A4ED1 /* ViewController.m in Sources */,
 				67A074CA2061F66B005A4ED1 /* main.m in Sources */,
 				67A074BC2061F66B005A4ED1 /* AppDelegate.m in Sources */,
+				67A074D62062510D005A4ED1 /* AppModel.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
