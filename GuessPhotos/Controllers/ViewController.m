@@ -10,11 +10,17 @@
 #import "AppModel.h"
 @interface ViewController ()
 - (IBAction)nextQuestion:(UIButton*)btn;
+- (IBAction)bigPhoto:(id)sender;
 @property (weak, nonatomic) IBOutlet UIButton *btnPhoto;
+@property (weak, nonatomic) IBOutlet UIButton *btnNext;
+@property (weak, nonatomic) IBOutlet UIButton *btnTips;
+@property (weak, nonatomic) IBOutlet UIButton *btnHelp;
+@property (weak, nonatomic) IBOutlet UIButton *btnCount;
 @property(assign,nonatomic)int index;
 @property(nonatomic,strong)NSArray* questions;
 @property (weak, nonatomic) IBOutlet UILabel *page;
 @property (weak, nonatomic) IBOutlet UILabel *answer;
+@property(weak,nonatomic)UIButton* cover;
 
 @end
 
@@ -22,10 +28,8 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    _index = 0;
-    [self.btnPhoto setImage:[UIImage imageNamed:@"1"] forState:(UIControlStateNormal)];
-    self.page.text = [NSString stringWithFormat:@"%d/%ld",self.index+1,self.questions.count];
-    self.answer.text = @"";
+    _index = -1;
+    [self nextQuestion:nil];
     // Do any additional setup after loading the view, typically from a nib.
 }
 
@@ -63,7 +67,6 @@
         [self.btnPhoto setImage:[UIImage imageNamed:appModel.icon] forState:(UIControlStateNormal)];
         self.page.text = [NSString stringWithFormat:@"%d/%ld",self.index+1,self.questions.count];
         self.answer.text = appModel.answer;
-     
     }
     else
     {
@@ -71,5 +74,48 @@
     }
     
     
+}
+//点击按钮，放大图片
+- (IBAction)bigPhoto:(id)sender
+{
+    //1.添加阴影(用于盖住图片)
+    UIButton* btn = [[UIButton alloc]initWithFrame:self.view.bounds];
+    self.cover = btn;
+    [_cover setBackgroundColor:[UIColor blackColor]];
+    [_cover addTarget:self action:@selector(clickShadow) forControlEvents:(UIControlEventTouchUpInside)];
+    //设置透明度事情成为阴影
+    _cover.alpha = 0.5;
+    //2.调整位置
+    [self.view addSubview:_cover];
+//    [self.view sendSubviewToBack:cover];//此方法会把view层级一直往父层级放，直到UIView层。所以在这里不适用种这方法
+//    [self.view bringSubviewToFront:self.btnPhoto];//下面可二选一方法
+    [self.view insertSubview:_cover belowSubview:self.btnPhoto];
+    //获取特定tag值的控件，设置其不可交互
+    for (UIButton *btn in self.view.subviews) {
+        
+        if (btn.tag == 1)
+            
+        {
+            btn.userInteractionEnabled = NO;
+        }
+        
+    }
+
+}
+
+-(void)clickShadow
+{
+    //把阴影从父视图中去除
+    [self.cover removeFromSuperview];
+    //恢复其余按钮的可交互状态
+    for (UIButton *btn in self.view.subviews) {
+        
+        if (btn.tag == 1)
+            
+        {
+            btn.userInteractionEnabled = YES;
+        }
+        
+    }
 }
 @end
