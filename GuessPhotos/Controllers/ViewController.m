@@ -114,11 +114,21 @@
     [self.btnPhoto setFrame:CGRectMake(headViewX, headViewY, headViewW, headViewH)];
     [UIView commitAnimations];
 }
-
+//点击阴影部分，阴影消失，视图恢复原状
 -(void)clickShadow
 {
-    //把阴影从父视图中去除
-    [self.cover removeFromSuperview];
+    //图片尺寸位置恢复到原来
+    CGFloat headViewW = 180;
+    CGFloat headViewH = 180;
+    CGFloat headViewX = 97;
+    CGFloat headViewY = 160;
+    [UIView beginAnimations:nil context:nil];
+    [UIView setAnimationDuration: 1.0];
+    _cover.alpha = 0.0;//阴影颜色逐渐变浅
+    [self.btnPhoto setFrame:CGRectMake(headViewX, headViewY, headViewW, headViewH)];
+    //    把阴影从父视图中去除
+//    [self.cover removeFromSuperview];
+    [UIView commitAnimations];
     //恢复其余按钮的可交互状态
     for (UIButton *btn in self.view.subviews) {
         
@@ -129,11 +139,5 @@
         }
         
     }
-    //图片尺寸位置恢复到原来
-    CGFloat headViewW = 180;
-    CGFloat headViewH = 180;
-    CGFloat headViewX = 97;
-    CGFloat headViewY = 160;
-    [self.btnPhoto setFrame:CGRectMake(headViewX, headViewY, headViewW, headViewH)];
 }
 @end
