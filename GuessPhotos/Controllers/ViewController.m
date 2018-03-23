@@ -83,9 +83,9 @@
     self.cover = btn;
     [_cover setBackgroundColor:[UIColor blackColor]];
     [_cover addTarget:self action:@selector(clickShadow) forControlEvents:(UIControlEventTouchUpInside)];
-    //设置透明度事情成为阴影
+    //设置背景色透明度使之呈现阴影效果
     _cover.alpha = 0.5;
-    //2.调整位置
+    //2.添加进父视图，并调整层级位置
     [self.view addSubview:_cover];
 //    [self.view sendSubviewToBack:cover];//此方法会把view层级一直往父层级放，直到UIView层。所以在这里不适用种这方法
 //    [self.view bringSubviewToFront:self.btnPhoto];//下面可二选一方法
@@ -100,6 +100,11 @@
         }
         
     }
+    CGFloat headViewW = (self.view.frame.size.width)*0.6;
+    CGFloat headViewH = (self.view.frame.size.height)*0.5;
+    CGFloat headViewX = (self.view.frame.size.width - headViewW)*0.5;
+    CGFloat headViewY = (self.view.frame.size.height - headViewH)*0.5;
+    [self.btnPhoto setFrame:CGRectMake(headViewX, headViewY, headViewW, headViewH)];
 
 }
 
@@ -117,5 +122,11 @@
         }
         
     }
+    //图片尺寸位置恢复到原来
+    CGFloat headViewW = 180;
+    CGFloat headViewH = 180;
+    CGFloat headViewX = 97;
+    CGFloat headViewY = 160;
+    [self.btnPhoto setFrame:CGRectMake(headViewX, headViewY, headViewW, headViewH)];
 }
 @end
