@@ -148,4 +148,18 @@
         
     }
 }
+
+//点击图片控制本身的放大缩小（包含阴影的逐渐显现和消失）
+-(IBAction)PhotoClick
+{
+    //如果当前阴影不存在，说明点击之后是要做放大图片操作
+    if(self.cover==nil)
+    {
+        [self bigPhoto:nil];//直接调用点击放大图片的方法
+    }
+    else//否则就是缩小图片操作
+    {
+        [self clickShadow];
+    }
+}
 @end
