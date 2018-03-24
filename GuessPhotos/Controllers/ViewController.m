@@ -59,21 +59,28 @@
 
 
 - (IBAction)nextQuestion:(UIButton*)btn {
-    if(_index!=2)
-    {
+//1.设置界面上部分图片信息
         self.index++;
-//        NSString* index = [NSString stringWithFormat:@"%d",self.index];
         AppModel* appModel = self.questions[_index];
         [self.btnPhoto setImage:[UIImage imageNamed:appModel.icon] forState:(UIControlStateNormal)];
         self.page.text = [NSString stringWithFormat:@"%d/%ld",self.index+1,self.questions.count];
         self.answer.text = appModel.answer;
+    btn.enabled = (self.index!=self.questions.count-1);
+
+//2.设置界面下部分答案等信息
+    NSUInteger answerLenth = appModel.answer.length;
+    UIView* answerView = [self.view viewWithTag:1];
+    CGFloat answerW = answerView.frame.size.height;
+    CGFloat answerH = answerW;
+    CGFloat answerY = 0;
+    CGFloat answerLeftMargin = answerView.frame.size.width - answerW*answerLenth
+    for (int i=0; i<answerLenth; i++) {
+        //创建按钮
+        UIButton *answerBtn = [[UIButton alloc] init];
+        //设置frame
+        answerBtn.frame = CGRectMake(<#CGFloat x#>, <#CGFloat y#>, answerW, answerH);
+
     }
-    else
-    {
-        btn.enabled = NO;
-    }
-    
-    
 }
 //点击按钮，放大图片
 - (IBAction)bigPhoto:(id)sender
@@ -125,7 +132,7 @@
     /*采用头尾式动画实现阴影渐变浅直至消失
     [UIView beginAnimations:nil context:nil];
     [UIView setAnimationDuration: 1.0];
-    _cover.alpha = 0.0;//阴影颜色逐渐变浅
+    _cover.alpha = 0.0;//阴影颜色逐渐变浅 
     [self.btnPhoto setFrame:CGRectMake(headViewX, headViewY, headViewW, headViewH)];
     [UIView commitAnimations];
      //    把阴影从父视图中去除
