@@ -122,18 +122,25 @@
     CGFloat headViewH = 180;
     CGFloat headViewX = 97;
     CGFloat headViewY = 160;
+    /*采用头尾式动画实现阴影渐变浅直至消失
     [UIView beginAnimations:nil context:nil];
     [UIView setAnimationDuration: 1.0];
     _cover.alpha = 0.0;//阴影颜色逐渐变浅
     [self.btnPhoto setFrame:CGRectMake(headViewX, headViewY, headViewW, headViewH)];
-    //    把阴影从父视图中去除
-//    [self.cover removeFromSuperview];
     [UIView commitAnimations];
+     //    把阴影从父视图中去除
+     //    [self.cover removeFromSuperview];
+     */
+    //采用block动画实现阴影渐变浅直至消失
+    [UIView animateWithDuration:1.0 animations:^{
+        [self.btnPhoto setFrame:CGRectMake(headViewX, headViewY, headViewW, headViewH)];
+        self.cover.alpha = 0.0;
+    } completion:^(BOOL finished) {
+        [self.cover removeFromSuperview];
+    }];
     //恢复其余按钮的可交互状态
     for (UIButton *btn in self.view.subviews) {
-        
         if (btn.tag == 1)
-            
         {
             btn.userInteractionEnabled = YES;
         }
