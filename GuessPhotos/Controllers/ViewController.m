@@ -136,6 +136,7 @@
         [self.btnPhoto setFrame:CGRectMake(headViewX, headViewY, headViewW, headViewH)];
         self.cover.alpha = 0.0;
     } completion:^(BOOL finished) {
+        if(finished)
         [self.cover removeFromSuperview];
     }];
     //恢复其余按钮的可交互状态
