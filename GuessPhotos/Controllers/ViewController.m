@@ -69,17 +69,54 @@
 
 //2.设置界面下部分答案等信息
     NSUInteger answerLenth = appModel.answer.length;
-    UIView* answerView = [self.view viewWithTag:1];
+    UIView* answerView = [self.view viewWithTag:1001];//此处尚不理解为何：原本将tag值设为1，结果得不到想要的子view。将tag设为1001后可以拿到
+    for(UIButton* btn in answerView.subviews)
+    {
+        [btn removeFromSuperview];
+    }
     CGFloat answerW = answerView.frame.size.height;
     CGFloat answerH = answerW;
     CGFloat answerY = 0;
-    CGFloat answerLeftMargin = answerView.frame.size.width - answerW*answerLenth
+    CGFloat answerSpacemargin = 10;
+    CGFloat answerLeftMargin = (answerView.frame.size.width - answerW*answerLenth-answerSpacemargin*(answerLenth-1))*0.5;
     for (int i=0; i<answerLenth; i++) {
         //创建按钮
         UIButton *answerBtn = [[UIButton alloc] init];
         //设置frame
-        answerBtn.frame = CGRectMake(<#CGFloat x#>, <#CGFloat y#>, answerW, answerH);
-
+        answerBtn.frame = CGRectMake(answerLeftMargin+(answerSpacemargin+answerW)*i, answerY, answerW, answerH);
+        [answerBtn setBackgroundColor:[UIColor redColor]];
+        [answerView addSubview:answerBtn];
+        
+    }
+    
+    //3.设置待选项按钮
+    NSUInteger optionsCount = appModel.options.count;//总的option个数
+    CGFloat optionW = 40;
+    CGFloat optionH = optionW;
+    CGFloat optionSpaceMargin = 10;
+    NSUInteger row = 3;//列数
+    NSUInteger col = optionsCount/row;//行数
+    UIView* optionsView = [self.view viewWithTag:1002];
+    CGFloat optionsLeftMargin = (optionsView.frame.size.width -row*optionW-optionSpaceMargin*(row-1))*0.5;
+    for(UIButton* btn in optionsView.subviews)
+    {
+        [btn removeFromSuperview];
+    }
+    for (int i=0; i<optionsCount; i++) {
+        for (int j =0; j<row; j++) {
+            //创建按钮
+            UIButton *answerBtn = [[UIButton alloc] init];
+            //设置frame
+            CGFloat optionX = optionsLeftMargin+(optionSpaceMargin+optionW)*(j);
+            CGFloat optionY = (optionSpaceMargin+optionH)*i;
+            answerBtn.frame = CGRectMake(optionX,optionY,optionW, optionH);
+            [answerBtn setBackgroundColor:[UIColor redColor]];
+            [optionsView addSubview:answerBtn];
+        }
+        
+        
+        
+        
     }
 }
 //点击按钮，放大图片

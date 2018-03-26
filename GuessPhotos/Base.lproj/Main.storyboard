@@ -84,8 +84,13 @@
                                     <action selector="bigPhoto:" destination="BYZ-38-t0r" eventType="touchUpInside" id="9Uo-Gg-Y4O"/>
                                 </connections>
                             </button>
-                            <view tag="1" contentMode="scaleToFill" misplaced="YES" id="fil-K9-dt0">
+                            <view tag="1001" contentMode="scaleToFill" misplaced="YES" id="fil-K9-dt0">
                                 <rect key="frame" x="50" y="348" width="275" height="38"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </view>
+                            <view alpha="0.5" tag="1002" contentMode="scaleToFill" misplaced="YES" id="Mi8-Ql-ms9">
+                                <rect key="frame" x="0.0" y="394" width="375" height="133"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </view>
