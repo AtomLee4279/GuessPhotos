@@ -94,29 +94,26 @@
     CGFloat optionW = 40;
     CGFloat optionH = optionW;
     CGFloat optionSpaceMargin = 10;
-    NSUInteger row = 3;//列数
-    NSUInteger col = optionsCount/row;//行数
+    NSUInteger col = 4;//列数
+    NSUInteger row = optionsCount%col;//行数
     UIView* optionsView = [self.view viewWithTag:1002];
-    CGFloat optionsLeftMargin = (optionsView.frame.size.width -row*optionW-optionSpaceMargin*(row-1))*0.5;
+    CGFloat optionsLeftMargin = (optionsView.frame.size.width -col*optionW-optionSpaceMargin*(col-1))*0.5;
     for(UIButton* btn in optionsView.subviews)
     {
         [btn removeFromSuperview];
     }
-    for (int i=0; i<optionsCount; i++) {
-        for (int j =0; j<row; j++) {
-            //创建按钮
-            UIButton *answerBtn = [[UIButton alloc] init];
-            //设置frame
-            CGFloat optionX = optionsLeftMargin+(optionSpaceMargin+optionW)*(j);
-            CGFloat optionY = (optionSpaceMargin+optionH)*i;
-            answerBtn.frame = CGRectMake(optionX,optionY,optionW, optionH);
-            [answerBtn setBackgroundColor:[UIColor redColor]];
-            [optionsView addSubview:answerBtn];
-        }
-        
-        
-        
-        
+    for(int i=0;i<optionsCount;i++)
+    {
+        int curCol = i%col;//当前列
+        int curRow = i%row;//当前行
+        //创建按钮
+        UIButton *answerBtn = [[UIButton alloc] init];
+        //设置frame
+        CGFloat optionX = optionsLeftMargin+(optionSpaceMargin+optionW)*(curCol);
+        CGFloat optionY = (optionSpaceMargin+optionH)*curRow;
+        answerBtn.frame = CGRectMake(optionX,optionY,optionW, optionH);
+        [answerBtn setBackgroundColor:[UIColor redColor]];
+        [optionsView addSubview:answerBtn];
     }
 }
 //点击按钮，放大图片
