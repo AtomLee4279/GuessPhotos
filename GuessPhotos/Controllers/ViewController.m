@@ -67,7 +67,7 @@
         self.answer.text = appModel.answer;
     btn.enabled = (self.index!=self.questions.count-1);
 
-//2.设置界面下部分答案等信息
+//2.设置答案按钮
     NSUInteger answerLenth = appModel.answer.length;
     UIView* answerView = [self.view viewWithTag:1001];//此处尚不理解为何：原本将tag值设为1，结果得不到想要的子view。将tag设为1001后可以拿到
     for(UIButton* btn in answerView.subviews)
@@ -112,10 +112,28 @@
         CGFloat optionX = optionsLeftMargin+(optionSpaceMargin+optionW)*(curCol);
         CGFloat optionY = (optionSpaceMargin+optionH)*curRow;
         answerBtn.frame = CGRectMake(optionX,optionY,optionW, optionH);
+        [answerBtn setTitle:appModel.options[i] forState:UIControlStateNormal];
         [answerBtn setBackgroundColor:[UIColor redColor]];
+        [answerBtn setTag:i];
+        [answerBtn addTarget:self action:@selector(clickActionBtn:) forControlEvents:UIControlEventTouchUpInside];
         [optionsView addSubview:answerBtn];
     }
 }
+//点击待选项按钮触发事件
+-(void)clickActionBtn:(UIButton*)btn
+{
+    NSLog(@"clickActionBtn");
+    btn.hidden = YES;
+    UIView* optionsView = [self.view viewWithTag:1002];
+//    //把点中的待选项按钮文字设置到答案按钮
+//    for(UIButton* answerBtn in optionsView.subviews)
+//    {
+//        
+//        if([answerBtn.currentTitle isEqualToString:])
+//    }
+}
+
+
 //点击按钮，放大图片
 - (IBAction)bigPhoto:(id)sender
 {
