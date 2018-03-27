@@ -16,7 +16,9 @@
 @property (weak, nonatomic) IBOutlet UIButton *btnTips;
 @property (weak, nonatomic) IBOutlet UIButton *btnHelp;
 @property (weak, nonatomic) IBOutlet UIButton *btnCount;
-@property(assign,nonatomic)int index;
+@property(assign,nonatomic)int index;//用来记录图片索引
+@property(assign,nonatomic)int answerCount;//用来点击答案按钮的次数
+@property(assign,nonatomic)int optionCount;//用来点击待选项按钮次数
 @property(nonatomic,strong)NSArray* questions;
 @property (weak, nonatomic) IBOutlet UILabel *page;
 @property (weak, nonatomic) IBOutlet UILabel *answer;
@@ -29,6 +31,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     _index = -1;
+    _answerCount = 0;
+    _optionCount = 0;
     [self nextQuestion:nil];
     // Do any additional setup after loading the view, typically from a nib.
 }
@@ -85,6 +89,7 @@
         //设置frame
         answerBtn.frame = CGRectMake(answerLeftMargin+(answerSpacemargin+answerW)*i, answerY, answerW, answerH);
         [answerBtn setBackgroundColor:[UIColor redColor]];
+        [answerBtn addTarget:self action:@selector(clickAnswerbtn:) forControlEvents:(UIControlEventTouchUpInside)];
         [answerView addSubview:answerBtn];
         
     }
@@ -122,17 +127,44 @@
 //点击待选项按钮触发事件
 -(void)clickOptionBtn:(UIButton*)btn
 {
-    NSLog(@"clickActionBtn");
-    btn.hidden = YES;
-    UIView* answerView = [self.view viewWithTag:1001];
-//    //把点中的待选项按钮文字设置到答案按钮
-    for(UIButton* answerBtn in answerView.subviews)
+    AppModel* appModel = self.questions[_index];
+    if(_optionCount<appModel.options.count)
     {
-        NSString *answerTitle = [answerBtn titleForState:UIControlStateNormal];
-        if(answerTitle==nil)
+        _optionCount++;
+        NSLog(@"clickActionBtn");
+        //1.让该待选项按钮显示消失
+        btn.hidden = YES;
+        UIView* answerView = [self.view viewWithTag:1001];
+        //2.把点中的待选项按钮文字设置到第一个空白的答案按钮
+        for(UIButton* answerBtn in answerView.subviews)
         {
-            [answerBtn setTitle:btn.currentTitle forState:UIControlStateNormal];
-            break;
+            NSString *answerTitle = [answerBtn titleForState:UIControlStateNormal];
+            if(answerTitle==nil)
+            {
+                [answerBtn setTitle:btn.currentTitle forState:UIControlStateNormal];
+                _answerCount++;
+                break;
+            }
+        }
+    }
+}
+//点击答案按钮触发事件
+-(void)clickAnswerbtn:(UIButton*)btn
+{
+    if(_answerCount!=0)
+    {
+        //1.让自身显示状态消失
+        btn.hidden = YES;
+        //2.让本来消失掉的待选项恢复显示
+        UIView* optionsView = [self.view viewWithTag:1002];
+        for(UIButton* optionBtn in optionsView.subviews)
+        {
+            if([[optionBtn titleForState:UIControlStateNormal]isEqualToString:([btn titleForState:UIControlStateNormal])])
+            {
+                optionBtn.hidden = NO;
+                break;
+            }
+            
         }
     }
 }
