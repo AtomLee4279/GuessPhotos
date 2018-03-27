@@ -115,22 +115,26 @@
         [answerBtn setTitle:appModel.options[i] forState:UIControlStateNormal];
         [answerBtn setBackgroundColor:[UIColor redColor]];
         [answerBtn setTag:i];
-        [answerBtn addTarget:self action:@selector(clickActionBtn:) forControlEvents:UIControlEventTouchUpInside];
+        [answerBtn addTarget:self action:@selector(clickOptionBtn:) forControlEvents:UIControlEventTouchUpInside];
         [optionsView addSubview:answerBtn];
     }
 }
 //点击待选项按钮触发事件
--(void)clickActionBtn:(UIButton*)btn
+-(void)clickOptionBtn:(UIButton*)btn
 {
     NSLog(@"clickActionBtn");
     btn.hidden = YES;
-    UIView* optionsView = [self.view viewWithTag:1002];
+    UIView* answerView = [self.view viewWithTag:1001];
 //    //把点中的待选项按钮文字设置到答案按钮
-//    for(UIButton* answerBtn in optionsView.subviews)
-//    {
-//        
-//        if([answerBtn.currentTitle isEqualToString:])
-//    }
+    for(UIButton* answerBtn in answerView.subviews)
+    {
+        NSString *answerTitle = [answerBtn titleForState:UIControlStateNormal];
+        if(answerTitle==nil)
+        {
+            [answerBtn setTitle:btn.currentTitle forState:UIControlStateNormal];
+            break;
+        }
+    }
 }
 
 
