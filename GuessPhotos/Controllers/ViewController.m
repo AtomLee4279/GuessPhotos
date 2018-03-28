@@ -63,6 +63,8 @@
 
 
 - (IBAction)nextQuestion:(UIButton*)btn {
+    _optionCount = 0;
+    _answerCount = 0;
 //1.设置界面上部分图片信息
         self.index++;
         AppModel* appModel = self.questions[_index];
@@ -128,10 +130,12 @@
 -(void)clickOptionBtn:(UIButton*)btn
 {
     AppModel* appModel = self.questions[_index];
-    if(_optionCount<appModel.options.count)
+    if(_optionCount<appModel.answer.length)
     {
         _optionCount++;
-        NSLog(@"clickActionBtn");
+        if(_answerCount>0)
+        _answerCount--;
+        NSLog(@"clickOptionBtn");
         //1.让该待选项按钮显示消失
         btn.hidden = YES;
         UIView* answerView = [self.view viewWithTag:1001];
@@ -142,7 +146,6 @@
             if(answerTitle==nil)
             {
                 [answerBtn setTitle:btn.currentTitle forState:UIControlStateNormal];
-                _answerCount++;
                 break;
             }
         }
@@ -151,17 +154,21 @@
 //点击答案按钮触发事件
 -(void)clickAnswerbtn:(UIButton*)btn
 {
-    if(_answerCount!=0)
+    AppModel* appModel = self.questions[_index];
+    if(_answerCount<appModel.answer.length)
     {
-        //1.让自身显示状态消失
-        btn.hidden = YES;
-        //2.让本来消失掉的待选项恢复显示
+        _answerCount++;
+        if(_optionCount>0)
+        _optionCount--;
         UIView* optionsView = [self.view viewWithTag:1002];
         for(UIButton* optionBtn in optionsView.subviews)
         {
             if([[optionBtn titleForState:UIControlStateNormal]isEqualToString:([btn titleForState:UIControlStateNormal])])
             {
+                //1.让本来消失掉的待选项恢复显示
                 optionBtn.hidden = NO;
+                //2.让答案按钮文字显示状态消失
+                [btn setTitle:nil forState:UIControlStateNormal];
                 break;
             }
             
