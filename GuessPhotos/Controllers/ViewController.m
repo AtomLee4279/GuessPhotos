@@ -19,6 +19,7 @@
 @property(assign,nonatomic)int index;//用来记录图片索引
 @property(assign,nonatomic)int answerCount;//用来点击答案按钮的次数
 @property(assign,nonatomic)int optionCount;//用来点击待选项按钮次数
+@property(strong,nonatomic)NSMutableString* myAnswer;
 @property(nonatomic,strong)NSArray* questions;
 @property (weak, nonatomic) IBOutlet UILabel *page;
 @property (weak, nonatomic) IBOutlet UILabel *answer;
@@ -33,6 +34,8 @@
     _index = -1;
     _answerCount = 0;
     _optionCount = 0;
+//    AppModel* appModel = self.questions[0];
+//    self.myAnswer = [[NSMutableString alloc]initWithCapacity:appModel.answer.length];
     [self nextQuestion:nil];
     // Do any additional setup after loading the view, typically from a nib.
 }
@@ -68,6 +71,7 @@
 //1.设置界面上部分图片信息
         self.index++;
         AppModel* appModel = self.questions[_index];
+        self.myAnswer = [[NSMutableString alloc]initWithCapacity:appModel.answer.length];
         [self.btnPhoto setImage:[UIImage imageNamed:appModel.icon] forState:(UIControlStateNormal)];
         self.page.text = [NSString stringWithFormat:@"%d/%ld",self.index+1,self.questions.count];
         self.answer.text = appModel.answer;
@@ -130,6 +134,7 @@
 -(void)clickOptionBtn:(UIButton*)btn
 {
     AppModel* appModel = self.questions[_index];
+    UIView* answerView = [self.view viewWithTag:1001];
     if(_optionCount<appModel.answer.length)
     {
         _optionCount++;
@@ -138,7 +143,6 @@
         NSLog(@"clickOptionBtn");
         //1.让该待选项按钮显示消失
         btn.hidden = YES;
-        UIView* answerView = [self.view viewWithTag:1001];
         //2.把点中的待选项按钮文字设置到第一个空白的答案按钮
         for(UIButton* answerBtn in answerView.subviews)
         {
@@ -146,6 +150,11 @@
             if(answerTitle==nil)
             {
                 [answerBtn setTitle:btn.currentTitle forState:UIControlStateNormal];
+                [self.myAnswer appendString:[answerBtn titleForState:UIControlStateNormal]];
+                if([self.myAnswer isEqualToString:appModel.answer])
+                {
+                    NSLog(@"===yyyy===");
+                }
                 break;
             }
         }
@@ -176,6 +185,25 @@
     }
 }
 
+//检查答案是否正确
+-(BOOL)isRight
+{
+    BOOL result = NO;
+    AppModel* appModel = self.questions[_index];
+    NSMutableString* myAnswer = [[NSMutableString alloc]initWithCapacity:appModel.answer.length];
+    UIView* answerView = [self.view viewWithTag:1001];
+    for(UIButton* answerBtn in answerView.subviews)
+    {
+        [myAnswer appendString:[answerBtn titleForState:UIControlStateNormal]];
+    }
+    if([appModel.answer isEqualToString:myAnswer])
+    {
+        NSLog(@"right!");
+        result = YES;
+        
+    }
+    return result;
+}
 
 //点击按钮，放大图片
 - (IBAction)bigPhoto:(id)sender
