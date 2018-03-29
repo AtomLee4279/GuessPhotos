@@ -11,6 +11,7 @@
 @interface ViewController ()
 - (IBAction)nextQuestion:(UIButton*)btn;
 - (IBAction)bigPhoto:(id)sender;
+-(IBAction)PhotoClick;
 @property (weak, nonatomic) IBOutlet UIButton *btnPhoto;
 @property (weak, nonatomic) IBOutlet UIButton *btnNext;
 @property (weak, nonatomic) IBOutlet UIButton *btnTips;
