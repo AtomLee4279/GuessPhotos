@@ -19,7 +19,7 @@
 @property(assign,nonatomic)int index;//用来记录图片索引
 @property(assign,nonatomic)int answerCount;//用来点击答案按钮的次数
 @property(assign,nonatomic)int optionCount;//用来点击待选项按钮次数
-@property(strong,nonatomic)NSMutableString* myAnswer;
+@property(strong,nonatomic)NSMutableString* myAnswer;//用来记录用户组织选择的答案
 @property(nonatomic,strong)NSArray* questions;
 @property (weak, nonatomic) IBOutlet UILabel *page;
 @property (weak, nonatomic) IBOutlet UILabel *answer;
@@ -151,9 +151,12 @@
             {
                 [answerBtn setTitle:btn.currentTitle forState:UIControlStateNormal];
                 [self.myAnswer appendString:[answerBtn titleForState:UIControlStateNormal]];
+                NSLog(@"===before===%@",self.myAnswer);
                 if([self.myAnswer isEqualToString:appModel.answer])
                 {
-                    NSLog(@"===yyyy===");
+                    NSLog(@"===Your answer is right！===%@",self.myAnswer);
+                    self.myAnswer = nil;
+                    [self nextQuestion:nil];//答案正确，跳去下一题
                 }
                 break;
             }
@@ -178,6 +181,10 @@
                 optionBtn.hidden = NO;
                 //2.让答案按钮文字显示状态消失
                 [btn setTitle:nil forState:UIControlStateNormal];
+                //3.从尾部删掉一个记录用户组织选择的答案字符
+                NSRange range={_optionCount,1};
+                [self.myAnswer deleteCharactersInRange:(range)];
+                NSLog(@"after click answer:range%@---myanswer%@",NSStringFromRange(range),self.myAnswer);
                 break;
             }
             
