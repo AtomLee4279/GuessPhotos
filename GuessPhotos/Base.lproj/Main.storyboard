@@ -47,6 +47,9 @@
                                 <state key="normal" title="tips">
                                     <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
+                                <connections>
+                                    <action selector="tipsClick:" destination="BYZ-38-t0r" eventType="touchUpInside" id="ZNd-g9-e9n"/>
+                                </connections>
                             </button>
                             <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="93c-Gt-5TB">
                                 <rect key="frame" x="23" y="293" width="46" height="30"/>

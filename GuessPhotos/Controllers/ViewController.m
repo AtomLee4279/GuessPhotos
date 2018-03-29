@@ -11,6 +11,7 @@
 @interface ViewController ()
 - (IBAction)nextQuestion:(UIButton*)btn;
 - (IBAction)bigPhoto:(id)sender;
+- (IBAction)tipsClick:(id)sender;
 -(IBAction)PhotoClick;
 @property (weak, nonatomic) IBOutlet UIButton *btnPhoto;
 @property (weak, nonatomic) IBOutlet UIButton *btnNext;
@@ -236,6 +237,7 @@
     [self.btnPhoto setFrame:CGRectMake(headViewX, headViewY, headViewW, headViewH)];
     [UIView commitAnimations];
 }
+
 //点击阴影部分，阴影消失，视图恢复原状
 -(void)clickShadow
 {
@@ -282,6 +284,39 @@
     else//否则就是缩小图片操作
     {
         [self clickShadow];
+    }
+}
+
+- (IBAction)tipsClick:(id)sender
+{
+    UIView* answerView = [self.view viewWithTag:1001];
+    AppModel *appModel = self.questions[_index];
+    //1.清空所有答案按钮，仅保留答案按钮第一个按钮的正确答案文字作为提示
+    NSString *retainString = [appModel.answer substringToIndex:1
+                              ];//取出正确答案的第一个字作为提示保留
+    NSLog(@"tipsClick:retainString:%@",retainString);
+    for(int i=0;i<(answerView.subviews.count);i++)
+    {
+        UIButton*btn = answerView.subviews[i];
+        [btn setTitle:(i==0?retainString:nil) forState:UIControlStateNormal];
+    }
+    //2.让对应的待选项按钮显示
+    UIView* optionsView = [self.view viewWithTag:1002];
+    for(UIButton* optionBtn in optionsView.subviews)
+    {
+            if([optionBtn.currentTitle isEqualToString:retainString])//如果是保留答案提示的第一个字，则让该待选项按钮保持隐藏
+                continue;
+            //2.1.让其余本来消失掉的待选项恢复显示
+            optionBtn.hidden = NO;
+            //2.2记录待选项按钮点击次数的参数要相应-1
+            _optionCount--;
+            //2.3从尾部删掉一个记录用户组织选择的答案字符
+            NSRange range={_optionCount,1};
+            [self.myAnswer deleteCharactersInRange:(range)];
+            NSLog(@"after click tips:range%@---myanswer%@",NSStringFromRange(range),self.myAnswer);
+            break;
+        
+        
     }
 }
 @end
