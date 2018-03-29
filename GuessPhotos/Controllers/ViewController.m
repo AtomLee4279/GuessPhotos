@@ -19,8 +19,8 @@
 @property (weak, nonatomic) IBOutlet UIButton *btnHelp;
 @property (weak, nonatomic) IBOutlet UIButton *btnCount;
 @property(assign,nonatomic)int index;//用来记录图片索引
-@property(assign,nonatomic)int answerCount;//用来点击答案按钮的次数
-@property(assign,nonatomic)int optionCount;//用来点击待选项按钮次数
+@property(assign,nonatomic)int answerCount;//用来记录点击答案按钮的次数
+@property(assign,nonatomic)int optionCount;//用来记录点击待选项按钮次数
 @property(strong,nonatomic)NSMutableString* myAnswer;//用来记录用户组织选择的答案
 @property (weak, nonatomic) IBOutlet UIButton *btnScoreCount;//用来记录当前所得分数
 @property(nonatomic,strong)NSArray* questions;
@@ -304,19 +304,24 @@
     UIView* optionsView = [self.view viewWithTag:1002];
     for(UIButton* optionBtn in optionsView.subviews)
     {
-            if([optionBtn.currentTitle isEqualToString:retainString])//如果是保留答案提示的第一个字，则让该待选项按钮保持隐藏
+            //如果是保留答案提示的第一个字，则让该待选项按钮保持隐藏
+            if([optionBtn.currentTitle isEqualToString:retainString])
+            {
+                optionBtn.hidden = YES;
                 continue;
-            //2.1.让其余本来消失掉的待选项恢复显示
+            }
+            //让其余本来消失掉的待选项恢复显示
             optionBtn.hidden = NO;
-            //2.2记录待选项按钮点击次数的参数要相应-1
-            _optionCount--;
-            //2.3从尾部删掉一个记录用户组织选择的答案字符
-            NSRange range={_optionCount,1};
-            [self.myAnswer deleteCharactersInRange:(range)];
-            NSLog(@"after click tips:range%@---myanswer%@",NSStringFromRange(range),self.myAnswer);
-            break;
-        
-        
     }
+    //3.修改用来记录用户组织选择的答案(仅剩第一个提示答案的字符)
+    NSRange range={0,self.myAnswer.length};
+    //3.1先把它里面的全删了
+    [self.myAnswer deleteCharactersInRange:(range)];
+     NSLog(@"before retain 1 tip:range%@---myanswer%@",NSStringFromRange(range),self.myAnswer);
+    //3.2再把第一个答案提示加回去
+    [_myAnswer appendString:retainString];
+    NSLog(@"after retain 1 tip:range%@---myanswer%@",NSStringFromRange(range),self.myAnswer);
+    //4.记录点击待选项按钮的次数的_optionCount置为1
+    _optionCount = 1;
 }
 @end
