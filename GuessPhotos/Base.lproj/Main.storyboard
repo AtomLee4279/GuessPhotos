@@ -43,10 +43,10 @@
                                     <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
                             </button>
-                            <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" adjustsImageSizeForAccessibilityContentSizeCategory="YES" lineBreakMode="middleTruncation" id="Irz-h8-w3X">
-                                <rect key="frame" x="313" y="44" width="46" height="30"/>
+                            <button opaque="NO" tag="1" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="right" contentVerticalAlignment="center" buttonType="roundedRect" adjustsImageSizeForAccessibilityContentSizeCategory="YES" lineBreakMode="middleTruncation" id="Irz-h8-w3X">
+                                <rect key="frame" x="260" y="44" width="107" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="1000"/>
+                                <state key="normal" title="0"/>
                             </button>
                             <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="WTw-xw-2DG">
                                 <rect key="frame" x="313" y="293" width="46" height="30"/>
@@ -103,6 +103,7 @@
                         <outlet property="btnHelp" destination="93c-Gt-5TB" id="0HK-W8-KDA"/>
                         <outlet property="btnNext" destination="WTw-xw-2DG" id="9if-Ds-7d7"/>
                         <outlet property="btnPhoto" destination="oJM-gy-uT7" id="dXc-jl-Xoh"/>
+                        <outlet property="btnScoreCount" destination="Irz-h8-w3X" id="v4n-5N-YNd"/>
                         <outlet property="btnTips" destination="EqJ-NV-yqP" id="TFL-jR-baO"/>
                         <outlet property="page" destination="RVh-FV-7LS" id="UHh-IO-IMK"/>
                     </connections>

@@ -20,6 +20,7 @@
 @property(assign,nonatomic)int answerCount;//用来点击答案按钮的次数
 @property(assign,nonatomic)int optionCount;//用来点击待选项按钮次数
 @property(strong,nonatomic)NSMutableString* myAnswer;//用来记录用户组织选择的答案
+@property (weak, nonatomic) IBOutlet UIButton *btnScoreCount;//用来记录当前所得分数
 @property(nonatomic,strong)NSArray* questions;
 @property (weak, nonatomic) IBOutlet UILabel *page;
 @property (weak, nonatomic) IBOutlet UILabel *answer;
@@ -152,9 +153,12 @@
                 [answerBtn setTitle:btn.currentTitle forState:UIControlStateNormal];
                 [self.myAnswer appendString:[answerBtn titleForState:UIControlStateNormal]];
                 NSLog(@"===before===%@",self.myAnswer);
+                //答案首次正确
                 if([self.myAnswer isEqualToString:appModel.answer])
                 {
-                    NSLog(@"===Your answer is right！===%@",self.myAnswer);
+                    NSLog(@"===Your answer %@ is right!==即将跳去下一题",self.myAnswer);
+                    int myScore = [_btnScoreCount.currentTitle intValue];
+                    [_btnScoreCount setTitle:[NSString stringWithFormat:@"%d",myScore+100] forState:UIControlStateNormal];//当前分数+100分
                     self.myAnswer = nil;
                     [self nextQuestion:nil];//答案正确，跳去下一题
                 }
@@ -190,26 +194,6 @@
             
         }
     }
-}
-
-//检查答案是否正确
--(BOOL)isRight
-{
-    BOOL result = NO;
-    AppModel* appModel = self.questions[_index];
-    NSMutableString* myAnswer = [[NSMutableString alloc]initWithCapacity:appModel.answer.length];
-    UIView* answerView = [self.view viewWithTag:1001];
-    for(UIButton* answerBtn in answerView.subviews)
-    {
-        [myAnswer appendString:[answerBtn titleForState:UIControlStateNormal]];
-    }
-    if([appModel.answer isEqualToString:myAnswer])
-    {
-        NSLog(@"right!");
-        result = YES;
-        
-    }
-    return result;
 }
 
 //点击按钮，放大图片
