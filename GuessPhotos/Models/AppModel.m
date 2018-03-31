@@ -14,10 +14,10 @@
 {
     if(self= [super init])
     {
-        self.icon = dict[@"icon"];
-        self.answer = dict[@"answer"];
-//        self.answer = dict[@"title"];
-        self.options = dict[@"options"];
+//        self.icon = dict[@"icon"];
+//        self.answer = dict[@"answer"];
+//        self.options = dict[@"options"];
+        [self setValuesForKeysWithDictionary:dict];//KVC方式赋值
     }
     return self;
 }
