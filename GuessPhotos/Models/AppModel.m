@@ -17,7 +17,8 @@
 //        self.icon = dict[@"icon"];
 //        self.answer = dict[@"answer"];
 //        self.options = dict[@"options"];
-        [self setValuesForKeysWithDictionary:dict];//KVC方式赋值
+        [self setValue:dict[@"icon"] forKeyPath:@"icon"];//KVC方式赋值1
+        [self setValuesForKeysWithDictionary:dict];//KVC方式赋值2
     }
     return self;
 }
